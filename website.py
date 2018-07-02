@@ -5,6 +5,7 @@ import requests
 from bs4 import BeautifulSoup
 import main
 
+
 # 得到soup，因后文通用，直接放这儿就行了
 def urlBS(url):
     response = requests.get(url)
@@ -43,3 +44,19 @@ def get_all_brand_name(channel_url):
             main.brand_name_href_dic[brand_name] = brand_url
 
     return brand_name_list
+
+
+def choose_one_brand(brand_name_list):
+    # 一行输出5个品牌
+    one_line_brand = ''
+    for index in range(len(brand_name_list)):
+        temp_info = '【' + str(index) + '】' + brand_name_list[index]
+        one_line_brand += temp_info + '  '
+        if (index != 0 and index % 5 == 0) or index == len(brand_name_list) - 1:
+            print one_line_brand
+            one_line_brand = ''
+    try:
+        brand_key = input(unicode('请输入一个品牌左侧的序号'))
+    except:
+        brand_key = input(unicode('输入异常，请重新输入一个品牌左侧的序号'))
+    return brand_key

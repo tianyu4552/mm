@@ -3,8 +3,6 @@
 
 # 打包输出成exe的时候，需要转化为input(unicode('xxxx'）.encode('gbk'))
 import sys
-import time
-import uuid
 import website
 
 reload(sys)
@@ -20,10 +18,5 @@ if __name__ == '__main__':
     channel_url = website.get_channel_url()
     print u'进入的频道为: ' + channel_url
     brand_name_list = website.get_all_brand_name(channel_url)
-    total_brand = ''
-    for index in range(len(brand_name_list)):
-        temp_info = '【' + str(index) + '】' + brand_name_list[index]
-        total_brand += temp_info + '  '
-        if (index != 0 and index % 5 == 0) or index == len(brand_name_list)-1:
-            print total_brand
-            total_brand = ''
+    brand_key = website.choose_one_brand(brand_name_list)
+    print u'选择的品牌是: ' + brand_name_href_dic[brand_key]
