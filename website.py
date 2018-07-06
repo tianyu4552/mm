@@ -84,3 +84,13 @@ def fetch_brand_all_product(brand_name, brand_url):
             if img_name is None or img_name == '':
                 img_name = pidRdm.get_random_str()
             file.store_product_img(brand_name, product_id, img_name, img_url)
+
+
+def test():
+    url = 'https://www.vmei.com/nca-12-1.html'
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36'
+    }
+    req = requests('GET', url, headers=headers)
+    prepped = req.prepare()
+    req = requests.get(url, headers)
