@@ -3,10 +3,10 @@
 
 import random as rdm
 
-def get_random_str():
+
+def get_random_str(length):
     str = ''
     chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789'
-    for i in range(18):
+    for i in range(length):
         str += rdm.choice(chars)
     return str
-
