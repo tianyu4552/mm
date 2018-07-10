@@ -9,6 +9,7 @@ import globalvar as gl
 import pid_random as pr
 import xlwt
 
+
 # -- img标签数组保存函数 ---
 def store_scroll_img_list(brand_name, product_id, img_list):
     for img in img_list:
@@ -39,17 +40,17 @@ def store_product_img(brand_name, product_id, file_name, img_url):
     urllib.urlretrieve(img_url, file_url)
 
 
-def get_file_object(brand_name, product_id):
-    brand_name = brand_name.replace('/', '_')
-    file_path = gl.root_dir + '/' + brand_name + '/' + product_id
-    make_dir(file_path)
-    file_url = gl.root_dir + '/' + brand_name + '/' + product_id + '/' + 'context.txt'
-    _file_object = open(file_url, 'w')
-    return _file_object
-
-
-def write_2_file(_file_object, context):
-    _file_object.write(context + '\n')
+# def get_file_object(brand_name, product_id):
+#     brand_name = brand_name.replace('/', '_')
+#     file_path = gl.root_dir + '/' + brand_name + '/' + product_id
+#     make_dir(file_path)
+#     file_url = gl.root_dir + '/' + brand_name + '/' + product_id + '/' + 'context.txt'
+#     _file_object = open(file_url, 'w')
+#     return _file_object
+#
+#
+# def write_2_file(_file_object, context):
+#     _file_object.write(context + '\n')
 
 
 # 判断路径是否存在, 如果不存在则创建
@@ -63,20 +64,28 @@ def make_dir(path):
     return
 
 
-def export_to_excel(brand_name):
+def export_to_excel(brand_name, product_name_id_dic):
     workbook = xlwt.Workbook()
     worksheet = workbook.add_sheet('sheet1')
 
     wrapper_title(worksheet)
 
-    for page_url in get_result_list:
-        page_url = page_url.encode('utf-8').decode('utf-8')
+    body_font_style = xlwt.XFStyle()
+    font = xlwt.Font()
+    font.name = u'宋体'
+    # 字体大小
+    font.height = 0x00E0
+    body_font_style.font = font
 
-        house_detail_url_list = gdfc.get_house_detail_url(page_url)
+    for (key, value) in product_name_id_dic.items():
+        line = worksheet.last_used_row + 1
 
-        for each in house_detail_url_list:
-            line = worksheet.last_used_row + 1
-            gdfc.write_to_excel(each, worksheet, line)
+        worksheet.write(line, 0, key, body_font_style)
+        worksheet.write(line, 1, value, body_font_style)
+
+    file_name = brand_name + '.xls'
+    # 文件保存
+    workbook.save(file_name)
 
 
 def wrapper_title(worksheet):
@@ -94,13 +103,14 @@ def wrapper_title(worksheet):
     alignment.vert = xlwt.Alignment.VERT_CENTER
     fontStyle.alignment = alignment
 
-    title_list = [u'标题', u'电话', u'租金', u'房屋面积', u'户型', u'朝向', u'楼层',
-                  u'类型', u'装修', u'房龄', u'小区', u'地址', u'房源描述']
+    title_list = [u'商品名称', u'商品ID']
 
     for index, title in enumerate(title_list):
         worksheet.write(0, index, title, fontStyle)
         # 标题宽度
         worksheet.col(index).width = 4500
+
+
 # if __name__ == '__main__':
 #     file_object = get_file_object('AHC 艾米', '508377')
 #     write_2_file(file_object, 'title:' + 'aaaaa')

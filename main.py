@@ -18,8 +18,8 @@ brand_name_href_dic = {}
 if __name__ == '__main__':
     print u'欢迎进入: xxx www.xxxx.com'
     is_change_channel = True
+    channel_url = ''
     while True:
-        channel_url = ''
         if is_change_channel:
             channel_url = website.get_channel_url()
             print u'进入的频道为: ' + channel_url

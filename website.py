@@ -40,6 +40,7 @@ def get_all_brand_name(channel_url):
     brand_name_list = []
     # 重置
     gl.clear_value(gl.brand_name_href_dic)
+    gl.clear_value(gl.product_name_id_dic)
 
     for index in range(len(brand_li_list)):
         # 下标0是'全部'的链接
@@ -80,7 +81,7 @@ def fetch_brand_all_product(brand_name, brand_url):
         # 9是/product/的长度
         product_id = product_detail_url[9: html_index]
 
-        product_name = product.find('.props').a.content
+        product_name = product.select('.props')[0].a.text
         gl.set_value(gl.product_name_id_dic, product_name, product_id)
 
         # 详情
@@ -92,4 +93,8 @@ def fetch_brand_all_product(brand_name, brand_url):
         # 详情-商品信息图
         detail_box_imgs = product_detail.select('.pro_box_main')[0].find_all('img')
         file.store_box_img_list(brand_name, product_id, detail_box_imgs)
+
+    file.export_to_excel(brand_name, gl.product_name_id_dic)
+
+
 
