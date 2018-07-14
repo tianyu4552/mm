@@ -25,10 +25,11 @@ def urlBS(url):
 # 通过交互的方式让搜索人输入条件，不输的话有默认值
 def get_channel_url():
     # 频道
-    channel_url = ['/nca-12-1.html', '/nca-13-1.html', '/nca-14-1.html', '/nca-15-1.html']
+    channel_url = ['/nca-12-1.html', '/nca-13-1.html', '/nca-14-1.html',
+                   '/nca-15-1.html', '/nca-16-1.html', '/nca-18-1.html', '/nca-17-1.html']
     try:
         channel_key = input('请按序号输入你想要进入的频道，'
-                            '【1】护肤，【2】彩妆，【3】香水，【4】身体护理\r\n')
+                            '【1】护肤，【2】彩妆，【3】香水，【4】身体护理,【5】洗发护理,【6】工具,【7】男士\r\n')
     except:
         channel_key = 1
     return gl.website_url + channel_url[channel_key-1]

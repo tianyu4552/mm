@@ -11,7 +11,7 @@ reload(sys)
 sys.setdefaultencoding('gbk')
 
 # ÍøÕ¾Ö÷Ò³
-website_url = 'https://www.vmei.com/'
+website_url = 'https://www.xx.com/'
 # Æ·ÅÆ-Á´½Ó×Öµä
 brand_name_href_dic = {}
 
