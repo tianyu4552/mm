@@ -66,11 +66,12 @@ def export_to_excel(brand_name, product_name_id_dic):
 
     for (key, value) in product_name_id_dic.items():
         line = worksheet.last_used_row + 1
-
         worksheet.write(line, 0, key, body_font_style)
+        worksheet.col(0).width = 30000
         worksheet.write(line, 1, value, body_font_style)
+        worksheet.col(1).width = 7000
 
-    file_name = brand_name + '.xls'
+    file_name = brand_name.replace('/', '') + '.xls'
     # 文件保存
     workbook.save(file_name)
 
@@ -95,7 +96,7 @@ def wrapper_title(worksheet):
     for index, title in enumerate(title_list):
         worksheet.write(0, index, title, fontStyle)
         # 标题宽度
-        worksheet.col(index).width = 4500
+        worksheet.col(index).width = 30000
 
 
 # if __name__ == '__main__':
